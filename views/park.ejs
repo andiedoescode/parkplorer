@@ -13,9 +13,27 @@
 				<article class="card-item">
 					<h2 class="card-name"><%= data.fullName %></h2>
 					<div class="card-info">
-						<p class="card-desc"><%= data.description %></p>
-						<p class="card-state"><%= data.states %></p>
+						<p class="card-desc">Description: <%= data.description %></p>
+						<p class="card-state">State: <%= data.states %></p>
+						<p class="card-act">
+							Activities: <% data.activities.forEach(item => { %> <%= item.name
+							%>, <% }) %>
+						</p>
+						<p>Hours:
+							<ul>
+								<li>Monday: <%= parkHrs.monday %></li>
+								<li>Tuesday: <%= parkHrs.tuesday %></li>
+								<li>Wedsnesday: <%= parkHrs.wednesday %></li>
+								<li>Thursday: <%= parkHrs.thursday %></li>
+								<li>Friday: <%= parkHrs.friday %></li>
+								<li>Saturday: <%= parkHrs.saturday %></li>
+								<li>Sunday: <%= parkHrs.sunday %></li>
+							</ul>
+						</p>
 					</div>
+					<% data.images.forEach(img => {%>
+					<img src="<%= img.url %>" alt="<%= img.altText %>" width="500" />
+					<% }); %>
 				</article>
 			</section>
 		</div>
