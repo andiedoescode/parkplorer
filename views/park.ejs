@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles/main.css" />
+		<title>National park</title>
+	</head>
+
+	<body>
+		<div class="container">
+			<section id="cards" class="cards">
+				<article class="card-item">
+					<h2 class="card-name"><%= data.fullName %></h2>
+					<div class="card-info">
+						<p class="card-desc"><%= data.description %></p>
+						<p class="card-state"><%= data.states %></p>
+					</div>
+				</article>
+			</section>
+		</div>
+	</body>
+</html>
