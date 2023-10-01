@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="/styles/main.css" />
-		<title>Parkplorer</title>
-	</head>
-
-	<body>
-		<div class="container">
+<% layout('layouts/boilerplate') %>
 			<section id="cards" class="cards">
 				<article class="card-item">
 					<h2 class="card-name"><%= data.fullName %></h2>
@@ -32,10 +22,7 @@
 						</p>
 					</div>
 					<% data.images.forEach(img => {%>
-					<img src="<%= img.url %>" alt="<%= img.altText %>" width="500" />
+					<img src="<%= img.url %>" alt="<%= img.altText %>" class="img-fluid" />
 					<% }); %>
 				</article>
 			</section>
-		</div>
-	</body>
-</html>

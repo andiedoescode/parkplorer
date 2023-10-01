@@ -1,21 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Parkplorer</title>
-	</head>
-	<body>
-		<h1>US National Parks, Seashores, and Recreation Areas</h1>
-		<ol>
-			<% for (park of data) { %>
-			<li>
-				<a href="/parks/<%= park.parkCode %>"
-					><%= park.fullName %> (<%= park.states %>)</a
-				>
-				- <%= park.designation %>
-			</li>
-			<% } %>
-		</ol>
-	</body>
-</html>
+<% layout('layouts/boilerplate') %>
+
+<h1>US National Parks, Seashores, and Recreation Areas</h1>
+<div class="row row-cols-auto">
+	<% for (park of data) { %>
+	<div class="col mt-5 mx-auto">
+		<div class="card h-100 mw-100" style="width: 18rem">
+			<a href="/parks/<%= park.parkCode %>">
+				<img
+					src="<%= park.images[0].url %>"
+					class="card-img-top object-fit-cover"
+					style="height: 180px"
+					alt="<%= park.images[0].altText %>" />
+			</a>
+			<div class="card-body">
+				<h5 class="card-title"><%= park.fullName %></h5>
+			</div>
+
+			<ul class="list-group list-group-flush">
+				<li
+					class="list-group-item text-secondary text-end text-uppercase fw-light">
+					<%= park.designation %>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<% } %>
+</div>
+
+<!-- PAGINATION -->
+<nav aria-label="Page navigation" class="mt-5">
+	<ul class="pagination justify-content-center">
+		<% if (page == 1) {%>
+		<li class="page-item disabled" aria-label="Previous">
+			<span class="page-link" aria-hidden="true">&laquo;</span>
+		</li>
+		<li class="page-item active" aria-current="page">
+			<span class="page-link">1</span>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/parks/page/2">2</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/parks/page/3">3</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/parks/page/8" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
+		<% } else if (page > 1 && page < 8) { %>
+		<li class="page-item">
+			<a class="page-link" href="/parks/page/1" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+			</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/parks/page/<%= page - 1 %>"
+				><%= page - 1 %></a
+			>
+		</li>
+		<li class="page-item active" aria-current="page">
+			<span class="page-link"><%= page %></span>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/parks/page/<%= Number(page) + 1 %>"
+				><%= Number(page) + 1 %></a
+			>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/parks/page/8" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
+		<% } else if (page == 8) {%>
+		<li class="page-item">
+			<a class="page-link" href="/parks/page/1" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+			</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/parks/page/6">6</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/parks/page/7">7</a>
+		</li>
+		<li class="page-item active" aria-current="page">
+			<span class="page-link">8</span>
+		</li>
+		<li class="page-item disabled" aria-label="Next">
+			<span class="page-link" aria-hidden="true">&raquo;</span>
+		</li>
+		<% } %>
+	</ul>
+</nav>

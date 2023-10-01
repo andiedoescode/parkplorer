@@ -1,15 +1,16 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const homeRoutes = require("./routes/home.js");
+const express = require("express")
+const bodyParser = require("body-parser")
+const engine = require("ejs-mate")
+const homeRoutes = require("./routes/home.js")
 const parkRoutes = require("./routes/park.js")
-// import parksRoutes from "./routes/parks.js"
-require('dotenv').config({path: './config/.env'})
+require("dotenv").config({ path: "./config/.env" })
 // dotenv.config({ path: "./config/.env" })
 
 const app = express()
 const port = 3000
 
 //Set Middleware
+app.engine('ejs', engine)
 app.set("view engine", "ejs")
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: true }))

@@ -5,12 +5,20 @@ require("dotenv").config({ path: "./config/.env" })
 const config = { headers: { "X-Api-Key": `${process.env.npsKey}` } }
 const API_URL = "https://developer.nps.gov/api/v1"
 
+const pageSize = 12 //Number of items per page
+const maxPages = 8 //Hard coded ~85 items divided by 12 items per page
+
 module.exports = {
 	//GET complete list of filtered target parks
 	getAllParks: async (req, res) => {
+		//Implementing pagination when displaying all parks
+		const pageNum = req.params.page || 1
+		const startIndex = (pageNum - 1) * pageSize
+		const endIndex = startIndex + pageSize
 		try {
 			const parks = await getParks()
-			res.render("allparks.ejs", { data: parks })
+			const parkPage = parks.slice(startIndex, endIndex)
+			res.render("allparks.ejs", { data: parkPage, page: pageNum })
 		} catch (err) {
 			console.error("Failed to make request: ", err.message)
 			res.render("allparks.ejs", {
@@ -30,7 +38,7 @@ module.exports = {
 			let filteredResult = result.filter((park) =>
 				targetParks.includes(park.designation)
 			)
-			res.render("allparks.ejs", { data: filteredResult })
+			res.render("allparks.ejs", { data: filteredResult, state: id })
 		} catch (err) {
 			console.error("Failed to make request:", err.message)
 			res.render("allparks.ejs", {
@@ -52,6 +60,30 @@ module.exports = {
 		} catch (err) {
 			console.error("Failed to make request:", err.message)
 			res.render("park.ejs", {
+				error: err.message,
+			})
+		}
+	},
+	paginate: async (req, res) => {
+		const pageNum = Number(req.params.page) || 1
+		let currentPage = req.params.page || 1
+		const numbering = {
+			nextPage: currentPage + 1,
+			prevPage: currentPage - 1,
+		}
+		const startIndex = (pageNum - 1) * pageSize
+		const endIndex = startIndex + pageSize
+		try {
+			const parks = await getParks()
+			const parkPage = parks.slice(startIndex, endIndex)
+			res.render("allparks.ejs", {
+				data: parkPage,
+				page: pageNum,
+				numbering: numbering,
+			})
+		} catch (err) {
+			console.error("Failed to make request: ", err.message)
+			res.render("allparks.ejs", {
 				error: err.message,
 			})
 		}

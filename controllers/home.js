@@ -6,7 +6,8 @@ const config = { headers: { "X-Api-Key": `${process.env.npsKey}` } }
 const API_URL = "https://developer.nps.gov/api/v1"
 
 let filteredResult = []
-let select = ""
+// let select = ""
+let state = ""
 
 module.exports = {
 	//GET index page of app
@@ -18,11 +19,14 @@ module.exports = {
 		res.render("explore.ejs", {
 			states: stateList,
 			data: filteredResult,
+			state: state,
 		})
+		filteredResult = []
+		state = ""
 	},
 	//POST retrieve parks of user selected state
 	findByState: async (req, res) => {
-		const state = req.body.stateName
+		state = req.body.stateName
 
 		try {
 			const response = await axios.get(
