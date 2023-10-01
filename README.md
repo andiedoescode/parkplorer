@@ -13,7 +13,9 @@ Parkplorer is built using MVC architecture to allow the project to be more maint
 
 ## Our Goal:
 
-Information for US National Parks can be found scattered all over the internet in various locations. This app aims to condense the search for these properties, which can also be used when trip planning or daydreaming. Having the ability to filter through all the parks by the dtails important to you is more helpful than having to navigate a variety of sites.
+Don't want to download a mobile app or sign up for yet another account? No problem. ParkPlorer can be used directly from a browser without any fuss.
+
+Information for US National Parks can be found scattered all over the internet in various locations. This web app aims to condense the search for these properties, which can also be used when trip planning or daydreaming. Having the ability to filter through all the parks by the dtails important to you is more helpful than having to navigate a variety of sites.
 
 ## Planned Features:
 - Authentication strategies
