@@ -1,28 +1,34 @@
 <% layout('layouts/boilerplate') %>
-			<section id="cards" class="cards">
-				<article class="card-item">
-					<h2 class="card-name"><%= data.fullName %></h2>
-					<div class="card-info">
-						<p class="card-desc">Description: <%= data.description %></p>
-						<p class="card-state">State: <%= data.states %></p>
-						<p class="card-act">
-							Activities: <% data.activities.forEach(item => { %> <%= item.name
-							%>, <% }) %>
-						</p>
-						<p>Hours:
-							<ul>
-								<li>Monday: <%= parkHrs.monday %></li>
-								<li>Tuesday: <%= parkHrs.tuesday %></li>
-								<li>Wedsnesday: <%= parkHrs.wednesday %></li>
-								<li>Thursday: <%= parkHrs.thursday %></li>
-								<li>Friday: <%= parkHrs.friday %></li>
-								<li>Saturday: <%= parkHrs.saturday %></li>
-								<li>Sunday: <%= parkHrs.sunday %></li>
-							</ul>
-						</p>
-					</div>
-					<% data.images.forEach(img => {%>
-					<img src="<%= img.url %>" alt="<%= img.altText %>" class="img-fluid" />
-					<% }); %>
-				</article>
-			</section>
+
+<!-- HEADER, jumbotron-style -->
+<div
+	style="
+		height: 400px;
+		background-image: url('<%= data.images[0].url %>');
+		background-position: center;
+		background-size: cover;
+	">
+	<div class="p-5" style="height: 400px; background-color: rgba(0, 0, 0, 0.4)">
+		<div
+			class="d-flex align-items-end justify-content-between text-white"
+			style="height: 300px">
+			<h1 class="mb-3 display-3 fw-medium"><%= data.fullName %></h1>
+			<span class="mb-3 fs-4 fw-light">
+				<%= data.addresses[0].city %>, <%= data.addresses[0].stateCode %>
+			</span>
+		</div>
+	</div>
+</div>
+
+<!-- Info about the park -->
+<div class="container my-5 d-flex flex-column">
+	<div class="text-bg-success p-5">
+		<blockquote class="lead fst-italic"><%= data.description %></blockquote>
+	</div>
+	<div class="text-bg-body p-5">
+		<p>
+			Activities: <% data.activities.forEach(item => { %> <%= item.name %>, <%
+			}) %>
+		</p>
+	</div>
+</div>

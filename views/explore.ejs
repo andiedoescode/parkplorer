@@ -1,57 +1,59 @@
 <% layout('layouts/boilerplate') %>
 
-<h1 class="display-3">Explore Your State</h1>
-<section>
-	<!-- <h2>Search for parks by state</h2> -->
-	<div class="input-field">
-		<form
-			action="/explore"
-			id="form"
-			class="browser-default"
-			name="stateName"
-			method="POST">
-			<select
+<div class="container">
+	<h1 class="display-3">Explore Your State</h1>
+	<section>
+		<!-- <h2>Search for parks by state</h2> -->
+		<div class="input-field">
+			<form
+				action="/explore"
+				id="form"
+				class="browser-default"
 				name="stateName"
-				id="state"
-				class="form-control"
-				aria-label="State Select">
-				<option value="null">Select State</option>
-				<% for (const [state, abbrev] of Object.entries(states)) { %>
-				<option value="<%= abbrev %>"><%= state %></option>
-				<% } %>
-			</select>
-			<button type="submit" class="btn btn-primary mt-2">Search</button>
-		</form>
-	</div>
-</section>
-<section class="mt-3">
-	<% if (data.length == 0) { %>
-	<p>No results to view.</p>
-	<% } %> <% if (data.length > 0) { %>
-	<div><h5>There are <%= data.length %> results in <%= state %>.</h5></div>
-	<div class="row row-cols-auto">
-		<% for (park of data) { %>
-		<div class="col mt-5 mx-auto">
-			<div class="card h-100 mw-100" style="width: 18rem">
-				<a href="/parks/<%= park.parkCode %>">
-					<img
-						src="<%= park.images[0].url %>"
-						class="card-img-top object-fit-cover"
-						style="height: 180px"
-						alt="<%= park.images[0].altText %>" />
-				</a>
-				<div class="card-body">
-					<h5 class="card-title"><%= park.fullName %></h5>
-				</div>
-				<ul class="list-group list-group-flush">
-					<li
-						class="list-group-item text-secondary text-end text-uppercase fw-light">
-						<%= park.designation %>
-					</li>
-				</ul>
-			</div>
+				method="POST">
+				<select
+					name="stateName"
+					id="state"
+					class="form-control"
+					aria-label="State Select">
+					<option value="null">Select State</option>
+					<% for (const [state, abbrev] of Object.entries(states)) { %>
+					<option value="<%= abbrev %>"><%= state %></option>
+					<% } %>
+				</select>
+				<button type="submit" class="btn btn-primary mt-2">Search</button>
+			</form>
 		</div>
+	</section>
+	<section class="mt-3">
+		<% if (data.length == 0) { %>
+		<p>No results to view.</p>
+		<% } %> <% if (data.length > 0) { %>
+		<div><h5>There are <%= data.length %> results in <%= state %>.</h5></div>
+		<div class="row row-cols-auto">
+			<% for (park of data) { %>
+			<div class="col mt-5 mx-auto">
+				<div class="card h-100 mw-100" style="width: 18rem">
+					<a href="/parks/<%= park.parkCode %>">
+						<img
+							src="<%= park.images[0].url %>"
+							class="card-img-top object-fit-cover"
+							style="height: 180px"
+							alt="<%= park.images[0].altText %>" />
+					</a>
+					<div class="card-body">
+						<h5 class="card-title"><%= park.fullName %></h5>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li
+							class="list-group-item text-secondary text-end text-uppercase fw-light">
+							<%= park.designation %>
+						</li>
+					</ul>
+				</div>
+			</div>
 
-		<% } } %>
-	</div>
-</section>
+			<% } } %>
+		</div>
+	</section>
+</div>
