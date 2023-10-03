@@ -1,4 +1,4 @@
-# Parkplorer: Your National Park Companion
+# ParkPlorer: Your National Park Companion
 
 **_App development in progress. Subject to change._**
 
