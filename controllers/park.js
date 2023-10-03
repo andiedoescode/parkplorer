@@ -1,14 +1,15 @@
-const axios = require("axios")
-require("dotenv").config({ path: "./config/.env" })
+import axios from "axios"
+import dotenv from "dotenv"
+dotenv.config({ path: "./config/.env" })
 
 //API Authorization config
 const config = { headers: { "X-Api-Key": `${process.env.npsKey}` } }
 const API_URL = "https://developer.nps.gov/api/v1"
 
 const pageSize = 12 //Number of items per page
-const maxPages = 8 //Hard coded ~85 items divided by 12 items per page
+const maxPages = 8 //Hard coded. ~85 items divided by 12 items per page
 
-module.exports = {
+export default {
 	//GET complete list of filtered target parks
 	getAllParks: async (req, res) => {
 		//Implementing pagination when displaying all parks

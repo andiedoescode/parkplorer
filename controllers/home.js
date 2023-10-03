@@ -1,5 +1,6 @@
-const axios = require("axios")
-require("dotenv").config({ path: "./config/.env" })
+import axios from "axios"
+import dotenv from "dotenv"
+dotenv.config({ path: "./config/.env" })
 
 //API Authorization config
 const config = { headers: { "X-Api-Key": `${process.env.npsKey}` } }
@@ -9,7 +10,7 @@ let filteredResult = []
 // let select = ""
 let state = ""
 
-module.exports = {
+export default {
 	//GET index page of app
 	getIndex: (req, res) => {
 		res.render("index.ejs")
@@ -40,9 +41,7 @@ module.exports = {
 			res.redirect("/explore")
 		} catch (err) {
 			console.error("Failed to make request:", err.message)
-			res.redirect("/explore", {
-				error: err.message,
-			})
+			res.redirect("/explore")
 		}
 	},
 }
